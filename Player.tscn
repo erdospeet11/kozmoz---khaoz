@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://peqgsqrof4sf"]
+[gd_scene load_steps=5 format=3 uid="uid://peqgsqrof4sf"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_bih3r"]
+[ext_resource type="Texture2D" uid="uid://cvm0jmimevymn" path="res://icon.svg" id="2_yrf3f"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ofag6"]
 
@@ -16,4 +17,22 @@ shape = SubResource("CapsuleShape3D_ofag6")
 mesh = SubResource("CapsuleMesh_fma00")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.752277, 0)
+transform = Transform3D(1, -2.77557e-17, 1.49012e-08, 0, 1, 1.86265e-09, -1.49012e-08, -1.86265e-09, 1, 0.00211753, 0.779158, -0.0131438)
+fov = 73.4
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_yrf3f")
+expand_mode = 1

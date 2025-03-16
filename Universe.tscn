@@ -1,0 +1,74 @@
+[gd_scene load_steps=10 format=3 uid="uid://dj1ufvr0oxv55"]
+
+[ext_resource type="PackedScene" uid="uid://peqgsqrof4sf" path="res://Player.tscn" id="1_ty5bw"]
+[ext_resource type="PackedScene" uid="uid://dnh0g5nkh16cv" path="res://gravity_area_test.tscn" id="2_kkoda"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4rbi4"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_a3axy"]
+sky_material = SubResource("ProceduralSkyMaterial_4rbi4")
+
+[sub_resource type="Environment" id="Environment_x1nfj"]
+background_mode = 2
+sky = SubResource("Sky_a3axy")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7wq87"]
+albedo_color = Color(0.0745098, 0.0431373, 0.176471, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_wahj0"]
+material = SubResource("StandardMaterial3D_7wq87")
+size = Vector2(40, 40)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_6v57m"]
+data = PackedVector3Array(20, 0, 20, -20, 0, 20, 20, 0, -20, -20, 0, 20, -20, 0, -20, 20, 0, -20)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ngw37"]
+height = 14.871
+
+[node name="Universe" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_x1nfj")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_wahj0")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_6v57m")
+
+[node name="CharacterBody3D" parent="." instance=ExtResource("1_ty5bw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 12.473)
+mesh = SubResource("CylinderMesh_ngw37")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -11.7592)
+mesh = SubResource("CylinderMesh_ngw37")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.40652, 0, -5.85096)
+mesh = SubResource("CylinderMesh_ngw37")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.39379, 0, -5.85096)
+mesh = SubResource("CylinderMesh_ngw37")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.39379, 0, 7.60202)
+mesh = SubResource("CylinderMesh_ngw37")
+
+[node name="Area3D" parent="." instance=ExtResource("2_kkoda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.4225, 0, 9.08101)
+direction = 4

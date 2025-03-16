@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://dnh0g5nkh16cv"]
+
+[ext_resource type="Script" path="res://gravity_area_test.gd" id="1_auu1d"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_odwl5"]
+radius = 5.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_03ckd"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_bppix"]
+material = SubResource("StandardMaterial3D_03ckd")
+radius = 5.0
+height = 10.0
+
+[node name="Area3D" type="Area3D"]
+gravity_space_override = 3
+gravity_point = true
+gravity_point_center = Vector3(0, 0, 0)
+gravity_direction = Vector3(0, 0, 0)
+gravity = 0.0
+script = ExtResource("1_auu1d")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_odwl5")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transparency = 0.75
+mesh = SubResource("SphereMesh_bppix")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
